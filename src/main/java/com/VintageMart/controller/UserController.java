@@ -5,12 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.VintageMart.entity.Products;
 import com.VintageMart.service.AddProducts;
+import com.VintageMart.service.DeleteProduct;
 import com.VintageMart.service.GetProducts;
+import com.VintageMart.service.UpdateById;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
@@ -43,6 +46,23 @@ public class UserController {
 	public ResponseEntity<List<Products>> get()
 	{
 		return get.getProducts();
+	}
+	@Autowired
+	private DeleteProduct delete;
+	
+	@RequestMapping(value = "/deleteProduct")
+	public ResponseEntity<String> delete(@RequestHeader("productID")int productId)
+	{
+		return delete.deleteProduct(productId);
+	}
+	
+	@Autowired
+	private UpdateById update;
+	
+	@RequestMapping(value = "/updatePrice")
+	public ResponseEntity<String> updateById(@RequestHeader int productId,@RequestHeader double basePrice)
+	{
+		return update.updateById(productId,basePrice);
 	}
 	
 }
