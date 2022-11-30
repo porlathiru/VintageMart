@@ -51,7 +51,7 @@ public class UserController {
 	private DeleteProduct delete;
 	
 	@RequestMapping(value = "/deleteProduct")
-	public ResponseEntity<String> delete(@RequestHeader("productID")int productId)
+	public ResponseEntity<String> delete(@RequestHeader("productId")int productId)
 	{
 		return delete.deleteProduct(productId);
 	}
